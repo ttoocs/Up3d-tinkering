@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(UP3D_TINKERING)
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/" ${CMAKE_MODULE_PATH})
+
+find_package(LibUSB REQUIRED)
+find_package(Curses REQUIRED)
+
+add_library(up3d_common UP3DCOMMON/up3d.c UP3DCOMMON/up3dcomm.c UP3DCOMMON/up3ddata.c)
+
+link_libraries(up3d_common m ${LibUSB_LIBRARIES})
+include_directories(UP3DCOMMON ${LibUSB_INCLUDE_DIRS})
+
+
+add_executable(up3d_upload UP3DTOOLS/upload.c)
+add_executable(up3d_info UP3DTOOLS/upinfo.c)
+add_executable(up3d_shell UP3DTOOLS/upshell.c)
+target_link_libraries(up3d_shell ${CURSES_LIBRARIES})
+
+add_executable(up3d_parse UP3DPARSE/parse.c)
+add_executable(up3d_convg UP3DPARSE/convg.c)
+
+add_executable(up3d_transcode
+  UP3DTRANSCODE/up3dconf.c
+  UP3DTRANSCODE/hoststepper.c
+  UP3DTRANSCODE/hostplanner.c
+  UP3DTRANSCODE/gcodeparser.c
+  UP3DTRANSCODE/umcwriter.c
+  UP3DTRANSCODE/up3dtranscode.c
+)
+
