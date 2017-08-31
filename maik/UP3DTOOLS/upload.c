@@ -72,8 +72,8 @@ int main(int argc, char const *argv[])
   uint32_t tblocks = 0;
   for(;;)
   {
-    UP3D_BLK blocks[72];
-    int nblocks = fread( blocks, sizeof(UP3D_BLK), 72, fdat );
+    UP3D_BLK blocks[128];
+    int nblocks = fread( blocks, sizeof(UP3D_BLK), 128, fdat );
     if( nblocks<=0 )
       break;
 
