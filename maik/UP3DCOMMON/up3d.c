@@ -124,7 +124,7 @@ bool UP3D_WriteBlocks( const UP3D_BLK *data, uint8_t blocks )
     if( _up3d_connected_fw_version<330 )
       if (b > 3) b = 3; //older firmware versions support max 64 bytes (3 blocks) per write only
 
-    if( b>72 ) b = 72;                          //limit to max. 2048 bytes per logical packet
+    if( b>128 ) b = 128;                          //limit to max. 2048 bytes per logical packet
 
     uint32_t fblocks= UP3D_GetFreeBlocks();
     if( b>fblocks ) b = fblocks;
